@@ -1,0 +1,14 @@
+﻿<Addin Type="Standard">
+  <ClassId>{1B14F7E0-B2B4-4A57-8A44-2407F87918BA}</ClassId>
+  <ClientId>{1B14F7E0-B2B4-4A57-8A44-2407F87918BA}</ClientId>
+  <DisplayName>WPF Dockable Window</DisplayName>
+  <Description>Create dockable window with a WPF control.</Description>
+  <Assembly>C:\ProgramData\Autodesk\Inventor Addins\Fütemire Add-ins\WPFDockableWindow.dll</Assembly>
+  <LoadOnStartUp>1</LoadOnStartUp>
+  <UserUnloadable>0</UserUnloadable>
+  <Hidden>0</Hidden>
+  <SupportedSoftwareVersionGreaterThan>15..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserInterfaceVersion>1</UserInterfaceVersion>
+  <LoadBehavior>0</LoadBehavior>
+</Addin>
