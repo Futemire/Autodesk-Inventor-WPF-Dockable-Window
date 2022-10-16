@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPFDockableWindow"
+             xmlns:local="clr-namespace:WPFDockableWindow" d:DataContext="{d:DesignInstance Type=local:QuickProps}"
              mc:Ignorable="d" 
              >
     <Grid>
@@ -11,7 +11,15 @@
             <RowDefinition Height="24*"/>
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="LV_iPropertyBlocks" MinHeight="24" ItemsSource="{Binding iProps}">
+        <DockPanel>
+        <!--<TextBox DockPanel.Dock="Top" Margin="0,0,0,10" Name="txtFilter" TextChanged="txtFilter_TextChanged" Text="Filter..."/>-->
+        <ListView x:Name="LV_iPropertyBlocks" MinHeight="24" ItemsSource="{Binding Path=iProps}" SelectedValue="{Binding SelectedPropertyValue}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"
+                              Content="{Binding}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderTemplate>
@@ -19,23 +27,30 @@
                             <TextBlock Text="{Binding}"  TextAlignment="Center"/>
                         </DataTemplate>
                     </GridView.ColumnHeaderTemplate>
-                    <GridViewColumn Header="Property Name" Width="120">
+                    <GridViewColumn Width="120">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Value" Click="lvUsersColumnHeader_Click">Property Name</GridViewColumnHeader>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Key}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Property Value" Width="120">
+                    <GridViewColumn Width="120">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Value" Click="lvUsersColumnHeader_Click">Property Value</GridViewColumnHeader>
+                            </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Path=Value}" />
+                                <TextBox Text="{Binding Path=Value, Mode=OneWay}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+        </DockPanel>
         <Border Grid.Row="1" VerticalAlignment="Bottom" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                 <Button x:Name="BTN_AddIpropertyBlock" Content="Add" MinHeight="24" MinWidth="80"/>
